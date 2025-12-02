@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Тестирование API Яндекс.Самокат",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "Создание курьера",
+        "status": "passed"
+      },
+      {
+        "name": "Логин курьера",
+        "status": "passed"
+      },
+      {
+        "name": "Создание заказа",
+        "status": "passed"
+      },
+      {
+        "name": "Получение списка заказов",
+        "status": "passed"
+      }
+    ]
+  }
+]

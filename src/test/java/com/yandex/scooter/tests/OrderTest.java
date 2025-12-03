@@ -1,69 +1,47 @@
 package com.yandex.scooter.tests;
 
 import com.yandex.scooter.api.OrderApi;
+import com.yandex.scooter.models.OrderModel;
+import com.yandex.scooter.utils.DataGenerator;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import static org.junit.Assert.*;
 
+@RunWith(Parameterized.class)
 public class OrderTest {
-    private OrderApi orderApi = new OrderApi();
-    
-    @Test
-    @Step("Тест создания заказа с цветом BLACK")
-    public void testCreateOrderWithBlackColor() {
-        String[] colors = {"BLACK"};
-        
-        Response response = orderApi.createOrder(
-            "Иван", "Иванов", "Москва, ул. Ленина 1", 
-            "Комсомольская", "+79991112233", 3,
-            "2024-12-10", "Позвонить за час", colors
-        );
-        
-        assertEquals("Неверный код ответа", 201, response.getStatusCode());
-        assertNotNull("Должен вернуться track номер", response.body().jsonPath().getInt("track"));
+    private final OrderApi orderApi = new OrderApi();
+    private final OrderModel order;
+    private final String testDescription;
+
+    public OrderTest(OrderModel order, String testDescription) {
+        this.order = order;
+        this.testDescription = testDescription;
     }
-    
-    @Test
-    @Step("Тест создания заказа с цветом GREY")
-    public void testCreateOrderWithGreyColor() {
-        String[] colors = {"GREY"};
-        
-        Response response = orderApi.createOrder(
-            "Петр", "Петров", "Санкт-Петербург, Невский пр. 10", 
-            "Площадь Восстания", "+79992223344", 5,
-            "2024-12-11", "Не звонить", colors
-        );
-        
-        assertEquals("Неверный код ответа", 201, response.getStatusCode());
-        assertNotNull("Должен вернуться track номер", response.body().jsonPath().getInt("track"));
+
+    @Parameterized.Parameters(name = "{1}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+            { DataGenerator.getOrderWithBlackColor(), "Заказ с цветом BLACK" },
+            { DataGenerator.getOrderWithGreyColor(), "Заказ с цветом GREY" },
+            { DataGenerator.getOrderWithBothColors(), "Заказ с двумя цветами" },
+            { DataGenerator.getOrderWithoutColor(), "Заказ без указания цвета" }
+        });
     }
-    
+
     @Test
-    @Step("Тест создания заказа с двумя цветами")
-    public void testCreateOrderWithTwoColors() {
-        String[] colors = {"BLACK", "GREY"};
+    @Step("Тест создания заказа: {testDescription}")
+    public void testCreateOrder() {
+        Response response = orderApi.createOrder(order);
         
-        Response response = orderApi.createOrder(
-            "Сергей", "Сергеев", "Казань, ул. Баумана 5", 
-            "Кремлевская", "+79993334455", 2,
-            "2024-12-12", "Оставить у двери", colors
-        );
-        
-        assertEquals("Неверный код ответа", 201, response.getStatusCode());
-        assertNotNull("Должен вернуться track номер", response.body().jsonPath().getInt("track"));
-    }
-    
-    @Test
-    @Step("Тест создания заказа без указания цвета")
-    public void testCreateOrderWithoutColor() {
-        Response response = orderApi.createOrder(
-            "Анна", "Аннова", "Екатеринбург, ул. Мира 15", 
-            "Геологическая", "+79994445566", 1,
-            "2024-12-13", "Позвонить в домофон", null
-        );
-        
-        assertEquals("Неверный код ответа", 201, response.getStatusCode());
-        assertNotNull("Должен вернуться track номер", response.body().jsonPath().getInt("track"));
+        assertEquals("Неверный код ответа для " + testDescription, 
+                     201, response.getStatusCode());
+        assertNotNull("Должен вернуться track номер для " + testDescription, 
+                     response.body().jsonPath().getInt("track"));
     }
 }

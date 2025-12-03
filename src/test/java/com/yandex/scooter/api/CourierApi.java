@@ -1,48 +1,39 @@
 package com.yandex.scooter.api;
 
+import com.yandex.scooter.models.CourierModel;
+import com.yandex.scooter.utils.Endpoints;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class CourierApi {
-    private static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
     
     @Step("Создание курьера")
-    public Response createCourier(String login, String password, String firstName) {
-        String requestBody = String.format(
-            "{\"login\": \"%s\", \"password\": \"%s\", \"firstName\": \"%s\"}",
-            login, password, firstName
-        );
-        
+    public Response createCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
-                .baseUri(BASE_URL)
-                .body(requestBody)
+                .baseUri(Endpoints.BASE_URL)
+                .body(courier)  // Jackson автоматически сериализует объект в JSON
                 .when()
-                .post("/api/v1/courier");
+                .post(Endpoints.CREATE_COURIER);
     }
     
     @Step("Логин курьера")
-    public Response loginCourier(String login, String password) {
-        String requestBody = String.format(
-            "{\"login\": \"%s\", \"password\": \"%s\"}",
-            login, password
-        );
-        
+    public Response loginCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
-                .baseUri(BASE_URL)
-                .body(requestBody)
+                .baseUri(Endpoints.BASE_URL)
+                .body(courier)
                 .when()
-                .post("/api/v1/courier/login");
+                .post(Endpoints.LOGIN_COURIER);
     }
     
     @Step("Удаление курьера")
     public Response deleteCourier(String courierId) {
         return given()
                 .header("Content-type", "application/json")
-                .baseUri(BASE_URL)
+                .baseUri(Endpoints.BASE_URL)
                 .when()
-                .delete("/api/v1/courier/" + courierId);
+                .delete(Endpoints.DELETE_COURIER + courierId);
     }
 }

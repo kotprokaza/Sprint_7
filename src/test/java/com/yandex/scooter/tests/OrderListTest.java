@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class OrderListTest {
-    private OrderApi orderApi = new OrderApi();
+    private final OrderApi orderApi = new OrderApi();
     
     @Test
     @Step("Тест получения списка заказов")

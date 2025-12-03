@@ -9,12 +9,13 @@ target/
 .m2/
 build/
 
-# Mac OS
-.DS_Store
-
 # Allure
+.allure/
 allure-results/
 allure-report/
+
+# Mac OS
+.DS_Store
 
 # Logs
 *.log
@@ -22,3 +23,7 @@ logs/
 
 # OS generated files
 Thumbs.db
+
+# Temp files
+*.tmp
+*.temp

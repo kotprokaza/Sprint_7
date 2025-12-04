@@ -31,7 +31,7 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- RestAssured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -39,14 +39,14 @@
             <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- Jackson для JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        
+
         <!-- Allure JUnit 4 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -54,7 +54,7 @@
             <version>${allure.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- Allure RestAssured -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -62,7 +62,7 @@
             <version>${allure.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- SLF4J для логов -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -70,7 +70,7 @@
             <version>2.0.9</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- JavaFaker для генерации тестовых данных -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -92,7 +92,7 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
-            
+
             <!-- Maven Surefire Plugin для Allure -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -115,7 +115,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            
+
             <!-- Allure Maven Plugin -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>

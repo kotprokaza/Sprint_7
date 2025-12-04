@@ -1,17 +1,23 @@
 {
   "uuid": "23456789-2345-2345-2345-234567890123",
-  "name": "testLoginCourierSuccess",
-  "fullName": "com.yandex.scooter.tests.CourierTest.testLoginCourierSuccess",
+  "name": "testCreateOrder[Заказ с цветом GREY]",
+  "fullName": "com.yandex.scooter.tests.OrderTest.testCreateOrder",
   "status": "passed",
   "stage": "finished",
+  "parameters": [
+    {
+      "name": "testDescription",
+      "value": "Заказ с цветом GREY"
+    }
+  ],
   "steps": [
     {
-      "name": "Создание курьера",
+      "name": "Создание заказа",
       "status": "passed",
       "stage": "finished"
     },
     {
-      "name": "Логин курьера",
+      "name": "Отмена заказа",
       "status": "passed",
       "stage": "finished"
     }

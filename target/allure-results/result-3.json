@@ -1,0 +1,14 @@
+{
+  "uuid": "34567890-3456-3456-3456-345678901234",
+  "name": "testGetOrderList",
+  "fullName": "com.yandex.scooter.tests.OrderListTest.testGetOrderList",
+  "status": "passed",
+  "stage": "finished",
+  "steps": [
+    {
+      "name": "Получение списка заказов",
+      "status": "passed",
+      "stage": "finished"
+    }
+  ]
+}
